@@ -1,18 +1,34 @@
 ﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 class Program
 {
-    private static readonly string? targetWarehouseCode = null;
+    private static string? targetWarehouseCode = null;
 
-    static void Main()
+    static void Main(string[] args)
     {
         try
         {
             using SqlConnection connection = ConnectData();
+
+            // =====================================================
+            // ถ้าสั่งรันด้วย --test ให้รัน Unit Test แล้วจบโปรแกรม ไม่ต่อฐานข้อมูล
+            // =====================================================
+            if (args.Contains("--test"))
+            {
+                DRP_CleansingEngine.Tests.RunUnitTests();
+                return;
+            }
+
+            // รับ Argument จาก Command Line (เช่น --warehouse CMPMH)
+            if (args.Contains("--warehouse"))
+            {
+                int index = Array.IndexOf(args, "--warehouse");
+                if (index + 1 < args.Length)
+                {
+                    targetWarehouseCode = args[index + 1];
+                }
+            }
+
 
             // โหลดค่า ADI Threshold
             decimal adiThreshold = LoadAdiThreshold(connection);
