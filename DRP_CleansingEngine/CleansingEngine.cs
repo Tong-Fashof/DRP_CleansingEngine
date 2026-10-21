@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-public class SkuCleansingCandidate
+﻿public class SkuCleansingCandidate
 {
     public string warehouse_code { get; set; } = "";
     public string item_id { get; set; } = "";
@@ -108,10 +105,10 @@ public static class CleansingEngine
     {
         decimal sum = 0m;
         for (int i = 0; i < 24; i++)
-        { 
-            sum += demand[i]; 
+        {
+            sum += demand[i];
         }
-        
+
         return sum / 24.0m;
     }
 
@@ -127,7 +124,8 @@ public static class CleansingEngine
         }
 
         double variance = (double)(sumSqDiff / 23.0m);
-        return Math.Round((decimal)Math.Sqrt(Math.Max(0.0, variance)), 4);
+        //return Math.Round((decimal)Math.Sqrt(Math.Max(0.0, variance)), 4);
+        return (decimal)Math.Sqrt(Math.Max(0.0, variance));
     }
 
 
