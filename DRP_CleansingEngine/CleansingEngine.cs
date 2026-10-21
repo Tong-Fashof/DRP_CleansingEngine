@@ -17,6 +17,17 @@ public class SkuCleansingCandidate
 
 public static class CleansingEngine
 {
+    // ### Property คือข้อมูลหรือคุณสมบัติที่กำหนดไว้ใน SkuCleansingCandidate เพื่อให้สินค้าแต่ละรายการมีข้อมูลเหล่านั้น ###
+    /* Property           ใช้เก็บอะไร
+      HistoryMonths       จำนวนเดือนที่มีประวัติข้อมูล
+      ActiveMonths        จำนวนเดือนที่มี Demand
+      Adi                 ค่า Average Demand Interval
+      Sd                  ค่า Standard Deviation
+      CleansingStatus     สถานะ เช่น KEEP, PENDING
+      CleansingMethod     วิธีจัดการข้อมูล
+      CleansingReason     เหตุผลที่เลือกสถานะนั้น
+      Demand24M           ข้อมูล Demand ย้อนหลัง 24 เดือน */
+
     public static void CleansingCenterAll(List<SkuCleansingCandidate> list, decimal adiThreshold)
     {
         foreach (var c in list)
